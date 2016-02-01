@@ -14,3 +14,4 @@ media/uploads
 tmp
 .DS_Store
 setting.py
+db.sqlite3

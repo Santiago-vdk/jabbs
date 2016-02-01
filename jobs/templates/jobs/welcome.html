@@ -1,0 +1,91 @@
+﻿<html>
+   {% extends 'jobs/index.html' %} {% load staticfiles %} 
+  
+  
+   {% block unique_content %}
+   <style type="text/css">
+   body{
+    overflow:hidden;
+   }
+      .main-content{
+      height:100%;   
+      background-color: #eaeaea;         
+      }
+          html, body{
+      
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background-color: #fcfcfc;
+      height:100%;
+      width:100%;
+      }
+      .circle {
+        display: block;
+        width: 150px;
+          height: 150px;
+          margin: 1em auto;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center center;
+          -webkit-border-radius: 99em;
+          -moz-border-radius: 99em;
+          border-radius: 99em;
+          border: 5px solid #eee;
+          box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.9); 
+
+      }
+      /*.place{margin-top:10px;
+      border: #cdcdcd 1px solid;
+      border-radius: 1px;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;}*/
+.circle img {    
+    line-height: 0;
+    /* A one-second transition was to disturbing for me */
+    
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+    -moz-border-radius: 135px;
+    border-radius: 135px;
+    height: 140px;
+    width: 140px;
+}
+.circle img:hover {
+    /* Making images appear bigger and transparent on mouseover */
+    
+    opacity: 1;
+  transform: scale(1.5, 1.5);
+
+}
+      </style> 
+
+
+   <div class="container">
+      <div class="row text-center">
+         <div class="col-md-6">
+            <div class="place">
+               <div class="circle">
+                  <img src="http://dummyimage.com/600x400/000/ffffff.png&text=EI">
+               </div>
+               <pre>Electronic engineering</pre>
+            </div>
+         </div>
+         <div class="col-md-6">
+            <div class="place">
+               <div class="circle">
+                <img src=" http://dummyimage.com/600x400/000/ffffff.png&text=CE">
+               </div>
+                    <pre>Computer engineering</pre>
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endblock %}
+   {% block unique_keywords %}{% endblock %} 
+   {% block unique_footer %}{% endblock %} 
+</html>

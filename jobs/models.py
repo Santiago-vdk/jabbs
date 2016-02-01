@@ -6,7 +6,6 @@ from ckeditor.fields import RichTextField
 
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
-
     class Meta:
         verbose_name = 'tag'
         verbose_name_plural = 'tags'
@@ -14,6 +13,14 @@ class Tag(models.Model):
         
     def __str__(self):
         return self.name
+
+
+class School(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
         
 class Company(models.Model):
     name = models.CharField(max_length=32)
@@ -27,6 +34,7 @@ class Company(models.Model):
         return self.name
 
 class Job(models.Model):
+    school = models.ManyToManyField(School, blank=False)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     name = models.CharField(max_length=32)
     pub_date = models.DateTimeField('publish date')
