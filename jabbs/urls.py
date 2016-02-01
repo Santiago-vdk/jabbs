@@ -1,4 +1,4 @@
-"""jabbs_actinio_1a URL Configuration
+"""jabbs URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.9/topics/http/urls/
@@ -20,7 +20,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^jobs/', include('jobs.urls')),
-    url(r'^polls/', include('polls.urls')),
     url(r'^admin/', admin.site.urls),
 
 
