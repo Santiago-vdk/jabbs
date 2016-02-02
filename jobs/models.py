@@ -4,13 +4,6 @@ from django.db import models
 
 from ckeditor.fields import RichTextField
 
-
-
-#Location 
-#class PointOfInterest(models.Model):
-#    name = models.CharField(max_length=100)
-#    position = GeopositionField()
-
 #Tag Model
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -32,6 +25,7 @@ class Tag(models.Model):
 #School Model
 class School(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    initials = models.CharField(max_length=3,unique=True)
 
     def __str__(self):
         return self.name

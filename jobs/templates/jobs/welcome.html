@@ -71,24 +71,23 @@
 
 
    <div class="container">
+      {% if school_list %}
       <div class="row text-center">
+        {% for school in school_list %}
          <div class="col-md-6">
             <div class="place">
                <div class="circle">
-                  <a href="{{ request.META.HTTP_NAME }}/jobs/2"><img src="http://dummyimage.com/600x400/000/ffffff.png&text=EI"></a>
+                <a href="{{ request.META.HTTP_NAME }}/jobs/{{school.id}}"><img src=" http://dummyimage.com/600x400/000/ffffff.png&text={{school.initials}}"></a>
                </div>
-               <pre>Electronic engineering</pre>
+                    <pre>{{ school.name }}</pre>
             </div>
          </div>
-         <div class="col-md-6">
-            <div class="place">
-               <div class="circle">
-                <a href="{{ request.META.HTTP_NAME }}/jobs/1"><img src=" http://dummyimage.com/600x400/000/ffffff.png&text=CE"></a>
-               </div>
-                    <pre>Computer engineering</pre>
-            </div>
-         </div>
+         {% endfor %}
+
       </div>
+        {% else %} 
+          <p>Wait what? We found no registered Schools, be the first one!</p>
+        {% endif %}
    </div>
 
 

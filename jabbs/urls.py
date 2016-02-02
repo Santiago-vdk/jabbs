@@ -19,7 +19,7 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name="jobs/welcome.html")),
+    url(r'^$', 'jobs.views.root'),# TemplateView.as_view(template_name="jobs/welcome.html")),
     url(r'^jobs/', include('jobs.urls')),
     url(r'^admin/', admin.site.urls),
 ]

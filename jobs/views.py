@@ -13,6 +13,17 @@ from datetime import datetime
 import json
 from .models import Job, Company, School
 
+
+def root(request):
+    current_user = request.user
+    school_list = School.objects.all()    
+
+    context = {'school_list':school_list,
+               'current_user':current_user}
+    
+    return render(request, 'jobs/welcome.html', context)    
+
+
 def index(request, school_id):
     current_user = request.user
     
