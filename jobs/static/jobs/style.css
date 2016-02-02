@@ -73,7 +73,7 @@ ul {
     padding-bottom: 5px;
     background-color: #EF3340;
     min-height: 15%;
-    overflow: overlay;
+    //overflow: overlay;
 }
 .box {
     display: table;

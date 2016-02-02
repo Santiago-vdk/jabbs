@@ -17,5 +17,4 @@ admin.site.register(Tag)
 admin.site.register(School)
 
 
-
 # Register your models here.

@@ -1,15 +1,28 @@
 {% load staticfiles %}
 <html>
   
-   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+   <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+
+
    <link rel="stylesheet" type="text/css" href="{% static 'jobs/style.css' %}"/>
+
    <script src="{% static 'jobs/style.js'%}"></script>
+
 
    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
+
+
+          
+
+
+
 <script type="text/javascript">
    function initialize() {
       var input = document.getElementById('location');
@@ -19,22 +32,21 @@
 </script>
 
 
-
    <head>
    </head>
    <body>
       <div class="search">
    {% block unique_keywords %}
          <div class="box">
-            <input type="search" placeholder="Keywords" class="keywords">
+            <input type="search" placeholder="Keywords" id="keywords" class="keywords">
             <input type="search" placeholder="Location" id="location" class="location">
             <div class="options">
                <ul class="list-inline">
                   <li><label ><input type="checkbox" value="freelance" checked="checked"> Freelance</label></li>
-                  <li><label ><input type="checkbox" value="freelance" checked="checked"> Full Time</label></li>
-                  <li><label ><input type="checkbox" value="freelance" checked="checked"> Internship</label></li>
-                  <li><label ><input type="checkbox" value="freelance" checked="checked"> Part Time</label></li>
-                  <li><label ><input type="checkbox" value="freelance" checked="checked"> Temporary</label></li>
+                  <li><label ><input type="checkbox" value="fulltime" checked="checked"> Full Time</label></li>
+                  <li><label ><input type="checkbox" value="internship" checked="checked"> Internship</label></li>
+                  <li><label ><input type="checkbox" value="parttime" checked="checked"> Part Time</label></li>
+                  <li><label ><input type="checkbox" value="temporary" checked="checked"> Temporary</label></li>
                </ul>
             </div>
          </div>
@@ -51,11 +63,13 @@
                            <span class="icon-bar"></span>
                            <span class="icon-bar"></span>
                            </button>
-                           <a class="navbar-brand" href="{{ request.META.HTTP_NAME }} /jobs">Jabbs</a>
+                           {% block unique_logo %}
+                           <a class="navbar-brand" href="{{ request.META.HTTP_NAME }}/jobs/{{school.id}}">Jabbs at {{school.name}}</a>
+                           {% endblock %}
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                            <ul class="nav navbar-nav">
-                              <li class="active"><a href="{{ request.META.HTTP_NAME }} /jobs" class="">Home</a></li>
+                              <li class="active"><a href="{{ request.META.HTTP_NAME }} /jobs/{{school.id}}" class="">Home</a></li>
 
                               
                               <li class=" dropdown">
@@ -67,8 +81,11 @@
                                     <li><a href="/">How to Join</a></li>
                                  </ul>
                               </li>
-                              {% if user.is_authenticated %}     
+                              {% if user.is_authenticated %}  
+                               {% block unique_add_job %}   
                               <li><a href="#">Add Job</a></li>
+                               {% endblock %}
+
                                {% endif %}
 
                               <li class=" dropdown">
@@ -77,23 +94,7 @@
                                     <li><a href="#">View Managers</a></li>
                                  </ul>
                               </li>
-                              <!--
-                              <li class=" dropdown">
-                                 <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Staff <span class="caret"></span></a>
-                                 <ul class="dropdown-menu">
-                                    <li><a href="#">View Staff</a></li>
-                                    <li><a href="#">Add New</a></li>
-                                    <li><a href="#">Bulk Upload</a></li>
-                                 </ul>
-                              </li>
-                              <li class=" down">
-                                 <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">HR <span class="caret"></span></a>
-                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Change Time Entry</a></li>
-                                    <li><a href="#">Report</a></li>
-                                 </ul>
-                              </li>
-                           -->
+     
                            </ul>
                            <ul class="nav navbar-nav pull-right">
                               {% if user.is_authenticated %}     
@@ -114,27 +115,6 @@
                   </nav>
                </div>
             </div>
-            <!--
-               <nav class="navbar navbar-default">
-                 <div class="container-fluid">
-                  <div class="navbar-header">
-                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                       <span class="sr-only">Toggle navigation</span>
-                       <span class="icon-bar"></span>
-                       <span class="icon-bar"></span>
-                       <span class="icon-bar"></span>
-                     </button>
-                     <a class="navbar-brand" href="#">Brand</a>
-                   </div>
-                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                     <ul class="nav navbar-nav">
-                       <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                       <li><a href="#">Link</a></li>
-                     </ul>
-                   </div>
-                 </div>
-               </nav>
-               -->
          </div>
       </div>
       
@@ -143,25 +123,26 @@
           
          <div class="jobs">
             {% if job_list %}
-            <ol>
+            <ol id="results">
+               
                {% for job in job_list %}
                <div class="job-link">
-                  <a href="{% url 'jobs:detail' job.id %}" >
+                  <a href="{% url 'jobs:detail' school.id job.id  %}" >
                      <div class="row">
                         <li class="col-md-1">   
                            <img src="{{job.company.logo}}" height="48" width="48">
                         </li>
-                        <li class="col-md-5">   
+                        <li class="col-md-4 ui_name" >   
                            <h3 class="job-name">{{job.name}}</h3>
                           
-                           <a href="google.com">
+                          
                            <span class="label label-default">{{job.company.name}}</span>
-                           </a>
+                          
                         </li>
-                        <div class="col-md-1">   
+                        <div class="col-md-4 ui_location">   
                            <h4 class="job-location">{{job.job_location}}</h4>
                         </div>
-                        <div class="col-md-5">   
+                        <div class="col-md-2">   
                            <h4 class="job-type">
                            <span class="label label-success">{{job.job_type}}</span></h4>
                         </div>
@@ -203,7 +184,7 @@
 {% if job_list %}
 <ul>
    {% for job in job_list %}
-   <li><a href="{% url 'jobs:detail' job.id %}">{{ job.name }}</a></li>
+   <li><a href="{% url 'jobs:detail' school.id job.id %}">{{ job.name }}</a></li>
    {% endfor %}
 </ul>
 {% else %}

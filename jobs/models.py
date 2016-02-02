@@ -14,6 +14,12 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+#class Job_Type(models.Model):
+#    name = models.CharField(max_length=24, unique=True)
+#
+#    def __str__(self):
+#        return self.name
+
 
 class School(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -41,7 +47,7 @@ class Job(models.Model):
     exp_date = models.DateTimeField('expiry date')
     job_location = models.CharField(max_length=24)
     job_position = models.CharField(max_length=24)
-    job_type = models.CharField(max_length=12)
+    #job_type =  models.ForeignKey(Job_Type, on_delete=models.CASCADE)
     job_requirements = models.CharField(max_length=200)
     tags = models.ManyToManyField(Tag, blank=True)
     description = RichTextField(blank=True)

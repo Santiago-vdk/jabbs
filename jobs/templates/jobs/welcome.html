@@ -1,6 +1,11 @@
 ﻿<html>
    {% extends 'jobs/index.html' %} {% load staticfiles %} 
   
+    {% block unique_logo %}
+    <a class="navbar-brand" href="{{ request.META.HTTP_NAME }}">Jabbs</a>
+    {% endblock %}
+
+     {% block unique_add_job %} {% endblock %}
   
    {% block unique_content %}
    <style type="text/css">
@@ -70,7 +75,7 @@
          <div class="col-md-6">
             <div class="place">
                <div class="circle">
-                  <img src="http://dummyimage.com/600x400/000/ffffff.png&text=EI">
+                  <a href="{{ request.META.HTTP_NAME }}/jobs/2"><img src="http://dummyimage.com/600x400/000/ffffff.png&text=EI"></a>
                </div>
                <pre>Electronic engineering</pre>
             </div>
@@ -78,13 +83,16 @@
          <div class="col-md-6">
             <div class="place">
                <div class="circle">
-                <img src=" http://dummyimage.com/600x400/000/ffffff.png&text=CE">
+                <a href="{{ request.META.HTTP_NAME }}/jobs/1"><img src=" http://dummyimage.com/600x400/000/ffffff.png&text=CE"></a>
                </div>
                     <pre>Computer engineering</pre>
             </div>
          </div>
       </div>
    </div>
+
+
+
    {% endblock %}
    {% block unique_keywords %}{% endblock %} 
    {% block unique_footer %}{% endblock %} 

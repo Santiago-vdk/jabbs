@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -32,7 +33,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jobs.apps.JobsConfig',
-   # 'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
-##    'crispy_forms',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -125,8 +124,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
-
-##LOGIN_URL = 'mysite_login'
-##LOGOUT_URL = 'mysite_logout'
-##LOGIN_REDIRECT_URL = 'index'
-##CRISPY_TEMPLATE_PACK = 'bootstrap3'
