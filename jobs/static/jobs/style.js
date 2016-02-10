@@ -51,10 +51,6 @@ else {
   $(".row").show();
 }
 });
-
-
-
-
 });
 
 $(document).on('click','.main-content',function(){

@@ -16,10 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
-
+import jobs.views
 
 urlpatterns = [
-    url(r'^$', 'jobs.views.root'),# TemplateView.as_view(template_name="jobs/welcome.html")),
+    url(r'^$', jobs.views.root),
     url(r'^jobs/', include('jobs.urls')),
     url(r'^admin/', admin.site.urls),
 ]

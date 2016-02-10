@@ -107,7 +107,7 @@
                               </li>
                               <li class=""><a href="{{ request.META.HTTP_NAME }} /jobs/accounts/logout/">Logout</a></li>
                               {% else %}
-                              <li class=""><a href="{{ request.META.HTTP_NAME }} /jobs/accounts/login/">Login</a></li>
+                              <li class=""><a href="{{ request.META.HTTP_NAME }} /jobs/accounts/login/?next={{ request.path|urlencode }}">Login</a></li>
                               {% endif %}    
                            </ul>
                         </div>
@@ -140,11 +140,21 @@
                           
                         </li>
                         <div class="col-md-4 ui_location">   
-                           <h4 class="job-location">{{job.job_location}}</h4>
+                           <a target="_blank" href="http://maps.google.co.uk/maps?q={{job.location_position.latitude}},{{job.location_position.longitude}}"><h4 class="job-location">{{job.location_name}}</h4></a>
                         </div>
                         <div class="col-md-2">   
                            <h4 class="job-type">
-                           <span class="label label-success">{{job.job_type}}</span></h4>
+                           {% if job.Type|stringformat:"s" == 'Full Time' %}
+                              <span class="label label-success">{{job.Type}}</span></h4>
+                           {% elif job.Type|stringformat:"s" == "Freelance" %}
+                              <span class="label label-info">{{job.Type}}</span></h4>
+                           {% elif job.Type|stringformat:"s" == "Temporary" %}
+                              <span class="label label-warning">{{job.Type}}</span></h4>
+                           {% elif job.Type|stringformat:"s" == "Internship" %}
+                              <span class="label label-primary">{{job.Type}}</span></h4>
+                           {% else %}   
+                              <span class="label label-default">{{job.Type}}</span></h4>   
+                           {% endif %}                        
                         </div>
                      </div>
                   </a>

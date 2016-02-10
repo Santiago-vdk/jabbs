@@ -11,7 +11,13 @@ from django.contrib.auth import authenticate, login, logout
 
 from datetime import datetime
 import json
-from .models import Job, Company, School
+
+from jobs.forms import *
+from django.views.decorators.csrf import csrf_protect
+
+from django.utils import timezone
+
+from .models import Job, Company, School, InvitationCode
 
 
 def root(request):
@@ -74,19 +80,78 @@ def user(request, username):
     context = {'owner': user}
     return render(request, 'jobs/user_profile.html', context)
 
+@csrf_protect
+def register_user(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+       
+            current_code = form.cleaned_data['invite_code']
+            try:
+                code = InvitationCode.objects.all().filter(code = current_code).get()
+                if code.is_used != True:
+                    user = User.objects.create_user(
+                    username=form.cleaned_data['username'],
+                    password=form.cleaned_data['password1'],
+                    email=form.cleaned_data['email'])
+                    
+                    code.user = user
+                    code.is_used = True
+                    code.used_date = timezone.now()
+
+                    code.save()
+                else:
+                    raise Http404("Invitation Code is used")  
+
+                
+                return HttpResponseRedirect('success/')
+            
+            except InvitationCode.DoesNotExist:
+                raise Http404("Invitation Code does not exist")                    
+    else:
+        form = RegistrationForm()
+    variables = RequestContext(request, {
+    'form': form
+    })
+ 
+    return render_to_response(
+    'jobs/login/register.html',
+    variables,
+    )
+ 
+def register_success(request):
+    return render_to_response(
+    'jobs/success.html',
+    )
+
 def login_user(request):
     logout(request)
     username = password = ''
     if request.POST:
+        
         username = request.POST['username']
         password = request.POST['password']
+        next = request.POST.get('next')
 
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/jobs/')
-    return render_to_response('jobs/login.html', context_instance=RequestContext(request))
+
+                if next is not None:
+                    
+                    return redirect(next)
+                else:
+                    return HttpResponseRedirect('jobs/welcome.html')
+
+    return render(request,'jobs/login/login.html')         
+
+def logout_user(request):
+    logout(request)
+                
+    return HttpResponseRedirect('/')
+
+
 
 @login_required(login_url='/jobs/accounts/login/')
 def get_jobs(request):
