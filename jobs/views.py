@@ -17,6 +17,8 @@ from django.views.decorators.csrf import csrf_protect
 
 from django.utils import timezone
 
+from endless_pagination.decorators import page_template
+
 from .models import Job, Company, School, InvitationCode
 
 
@@ -30,13 +32,17 @@ def root(request):
     return render(request, 'jobs/welcome.html', context)    
 
 
+
+@login_required(login_url='/jobs/accounts/login/')
 def index(request, school_id):
     current_user = request.user
-    
+
     current_school = get_object_or_404(School, pk=school_id)
     job_list = Job.objects.all().filter(school = current_school)
 
     latest_job_list = []
+
+    #Trabajos que han expirado
     expired_job_list = []
     for i in job_list:
         today = datetime.now()
@@ -47,12 +53,15 @@ def index(request, school_id):
             latest_job_list.append(i)
 
     job_list = latest_job_list
+    
             
     context = {'job_list':job_list,
                'school':current_school,
                'current_user':current_user}
     
     return render(request, 'jobs/index.html', context)
+
+
 
 @login_required(login_url='/jobs/accounts/login/')
 def detail(request, school_id, job_id):
@@ -66,8 +75,8 @@ def detail(request, school_id, job_id):
         job = Job.objects.all().filter(school = current_school).get(pk=job_id)
     
         today = datetime.now()
-        days_left = job.exp_date.date() - today.date()     
-     
+        days_left = str(job.exp_date.date() - today.date() )    
+        days_left = days_left[:days_left.find(',')]
         return render(request, 'jobs/detail.html', {'job': job,
                                                     'school':current_school,
                                                     'days_left':days_left,
@@ -125,32 +134,33 @@ def register_success(request):
     )
 
 def login_user(request):
-    logout(request)
-    username = password = ''
-    if request.POST:
-        
-        username = request.POST['username']
-        password = request.POST['password']
-        next = request.POST.get('next')
+    if (request.user.is_authenticated() == False):
+        username = password = ''
+        if request.POST:
+            username = request.POST['username']
+            password = request.POST['password']
+            next = request.POST.get('next')
 
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-
-                if next is not None:
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
                     
-                    return redirect(next)
-                else:
-                    return HttpResponseRedirect('jobs/welcome.html')
+                    if next is not None:
+                        return redirect(next)
+                    else:
+                        return HttpResponseRedirect('/')
 
-    return render(request,'jobs/login/login.html')         
-
+        return render(request,'jobs/login/login.html')         
+    else:
+        return HttpResponseRedirect('/')        
+        
 def logout_user(request):
-    logout(request)
-                
-    return HttpResponseRedirect('/')
-
+    if (request.user.is_authenticated()):    
+        logout(request)
+        return HttpResponseRedirect('/')
+    else:
+        return HttpResponseRedirect('/')        
 
 
 @login_required(login_url='/jobs/accounts/login/')

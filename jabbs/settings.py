@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jobs.apps.JobsConfig',
+    #'admin_shortcuts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'geoposition',
+    'endless_pagination',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -71,6 +73,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'jabbs.wsgi.application'
 
@@ -123,5 +127,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'C:/Users/svk19/Desktop/VdeK/jabbs/jobs/static/jobs'
 
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+
+##ADMIN_SHORTCUTS = [
+##    {
+##        'title': 'Shop',
+##        'shortcuts': [
+##            {
+##                'url_name': 'admin:shop_order_changelist',
+##                'title': 'Products',
+##                'count_new': 'project.utils.count_new_orders',
+##                'has_perms': 'project.utils.has_perms_to_orders',
+##            },
+##        ]
+##    },
+##]

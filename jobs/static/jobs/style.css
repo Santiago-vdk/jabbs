@@ -35,7 +35,8 @@ ul {
 .job-link .row {
     min-height: 60px;
     text-align: left;
-    padding: 20px;
+    //padding: 20px;
+    padding: 10px;
 }
 .header .row {
     min-height: 20px;
@@ -70,8 +71,9 @@ ul {
     font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     padding-left: 15px;
     padding-top: 70px;
-    padding-bottom: 5px;
-    background-color: #EF3340;
+    padding-bottom: 15px;
+    //background-color: #EF3340;
+    background-color: #002855;
     min-height: 15%;
     //overflow: overlay;
 }
@@ -81,15 +83,15 @@ ul {
     //float:left;
     width: 90%;
     //height:auto;
-    background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255, 255, 255, .1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255, 255, 255, .1) 15%, transparent 20%) 8px 9px;
-    background-color: #282828;
+    //background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255, 255, 255, .1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255, 255, 255, .1) 15%, transparent 20%) 8px 9px;
+    //background-color: #282828;
     background-size: 16px 16px;
     left: 0;
     top: 0;
     z-index: 1;
     color: rgba(130, 130, 130, 0.5);
     //line-height: 100px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    //box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
     padding: 10px;
 }
 .col-xs-6 {
@@ -142,7 +144,7 @@ box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 
 .navbar,
 .dropdown-menu {
-    background: rgba(255, 255, 255, 0.50);
+    background: rgba(255, 255, 255, 0.60);
     border: none;
 }
 .nav>li>a,
@@ -250,12 +252,13 @@ box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 5px 1px #969696;
 }
 .main-content {
-    padding-top: 2%;
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-bottom: 10px;
+    //padding-top: 2%;
+    //padding-left: 2%;
+    //padding-right: 2%;
+    //padding-bottom: 10px;
+    overflow-x:hidden;
     min-height: 430px;
-    background-color: #002855;
+   // background-color: #002855;
     position: relative;
     margin: 0 auto 0px; /* the bottom margin is the negative value of the footer's height */
 }
@@ -299,11 +302,11 @@ box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
     //  overflow-x:hidden;
     background-color: white;
     //height: 100%;
-    width: 90%;
+    width: 100%;
     position: relative;
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    //-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    //-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    //box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 .jobs:before,
 .jobs:after {
@@ -334,7 +337,8 @@ box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 
 .footer,
 .push {
-    height: 150px;
+    padding: 1%;
+    height: 60px;
     position:relative;
     bottom: 0;
     background-color: white;

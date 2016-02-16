@@ -1,10 +1,13 @@
 from django.conf.urls import url
 from django.contrib.auth import logout
 
+from django.views.generic import RedirectView
+
 from . import views
 
 app_name = 'jobs'
 urlpatterns = [
+    url(r'^$', RedirectView.as_view(url='/')),
     url(r'^(?P<school_id>[0-9]+)/$', views.index, name='index'),
     url(r'^(?P<school_id>[0-9]+)/(?P<job_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^user/(?P<username>[-\w]+)/$',views.user, name='user'),

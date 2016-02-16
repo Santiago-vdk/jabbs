@@ -15,3 +15,4 @@ tmp
 .DS_Store
 setting.py
 db.sqlite3
+requirements.txt

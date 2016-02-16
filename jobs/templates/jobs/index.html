@@ -1,56 +1,41 @@
 {% load staticfiles %}
 <html>
-  
    <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
-
-
+   <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
+   <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
    <link rel="stylesheet" type="text/css" href="{% static 'jobs/style.css' %}"/>
-
    <script src="{% static 'jobs/style.js'%}"></script>
-
-
    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
-
-
-          
-
-
-
-<script type="text/javascript">
-   function initialize() {
-      var input = document.getElementById('location');
-      var autocomplete = new google.maps.places.Autocomplete(input);
-   }
-   google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-
-
+   <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
+   <script type="text/javascript">
+      function initialize() {
+         var input = document.getElementById('location');
+         var autocomplete = new google.maps.places.Autocomplete(input);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+   </script>
    <head>
+      <title>Jabbs by VdeK</title>
    </head>
    <body>
       <div class="search">
-   {% block unique_keywords %}
+         {% block unique_keywords %}
          <div class="box">
             <input type="search" placeholder="Keywords" id="keywords" class="keywords">
             <input type="search" placeholder="Location" id="location" class="location">
             <div class="options">
                <ul class="list-inline">
-                  <li><label ><input type="checkbox" value="freelance" checked="checked"> Freelance</label></li>
-                  <li><label ><input type="checkbox" value="fulltime" checked="checked"> Full Time</label></li>
-                  <li><label ><input type="checkbox" value="internship" checked="checked"> Internship</label></li>
-                  <li><label ><input type="checkbox" value="parttime" checked="checked"> Part Time</label></li>
-                  <li><label ><input type="checkbox" value="temporary" checked="checked"> Temporary</label></li>
+                  <li><label ><input type="checkbox" id="option_freelance" value="freelance" checked="checked"> Freelance</label></li>
+                  <li><label ><input type="checkbox" id="option_fulltime" value="full time" checked="checked"> Full Time</label></li>
+                  <li><label ><input type="checkbox" id="option_internship" value="internship" checked="checked"> Internship</label></li>
+                  <li><label ><input type="checkbox" id="option_parttime" value="parttime" checked="checked"> Part Time</label></li>
+                  <li><label ><input type="checkbox" id="option_temporary" value="temporary" checked="checked"> Temporary</label></li>
                </ul>
             </div>
          </div>
-   {% endblock %}
+         {% endblock %}
          <div class="menu">
             <div class="navbar-wrapper">
                <div class="container-fluid">
@@ -70,8 +55,6 @@
                         <div id="navbar" class="navbar-collapse collapse">
                            <ul class="nav navbar-nav">
                               <li class="active"><a href="{{ request.META.HTTP_NAME }} /jobs/{{school.id}}" class="">Home</a></li>
-
-                              
                               <li class=" dropdown">
                                  <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Schools <span class="caret"></span></a>
                                  <ul class="dropdown-menu">
@@ -82,19 +65,16 @@
                                  </ul>
                               </li>
                               {% if user.is_authenticated %}  
-                               {% block unique_add_job %}   
+                              {% block unique_add_job %}   
                               <li><a href="/admin/jobs/job/add/">Add Job</a></li>
-                               {% endblock %}
-
-                               {% endif %}
-
+                              {% endblock %}
+                              {% endif %}
                               <li class=" dropdown">
                                  <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact <span class="caret"></span></a>
                                  <ul class="dropdown-menu">
                                     <li><a href="#">View Managers</a></li>
                                  </ul>
                               </li>
-     
                            </ul>
                            <ul class="nav navbar-nav pull-right">
                               {% if user.is_authenticated %}     
@@ -102,7 +82,7 @@
                                  <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Signed in as {{current_user}}<span class="caret"></span></a>
                                  <ul class="dropdown-menu">
                                     <li><a href="#">Change Password</a></li>
-                                    <li><a href="{{ request.META.HTTP_NAME }} /admin">My Profile</a></li>
+                                    <li><a href="/admin">My Profile</a></li>
                                  </ul>
                               </li>
                               <li class=""><a href="{{ request.META.HTTP_NAME }} /jobs/accounts/logout/">Logout</a></li>
@@ -117,14 +97,11 @@
             </div>
          </div>
       </div>
-      
       <div class="main-content" style="">
-   {% block unique_content %}
-          
+         {% block unique_content %}
          <div class="jobs">
             {% if job_list %}
             <ol id="results">
-               
                {% for job in job_list %}
                <div class="job-link">
                   <a href="{% url 'jobs:detail' school.id job.id  %}" >
@@ -132,93 +109,52 @@
                         <li class="col-md-1">   
                            <img src="{{job.company.logo}}" height="48" width="48">
                         </li>
-                        <li class="col-md-4 ui_name" >   
+                        <li class="col-md-4 ui_name" >
                            <h3 class="job-name">{{job.name}}</h3>
-                          
-                          
                            <span class="label label-default">{{job.company.name}}</span>
-                          
                         </li>
-                        <div class="col-md-4 ui_location">   
-                           <a target="_blank" href="http://maps.google.co.uk/maps?q={{job.location_position.latitude}},{{job.location_position.longitude}}"><h4 class="job-location">{{job.location_name}}</h4></a>
-                        </div>
-                        <div class="col-md-2">   
-                           <h4 class="job-type">
-                           {% if job.Type|stringformat:"s" == 'Full Time' %}
-                              <span class="label label-success">{{job.Type}}</span></h4>
-                           {% elif job.Type|stringformat:"s" == "Freelance" %}
-                              <span class="label label-info">{{job.Type}}</span></h4>
-                           {% elif job.Type|stringformat:"s" == "Temporary" %}
-                              <span class="label label-warning">{{job.Type}}</span></h4>
-                           {% elif job.Type|stringformat:"s" == "Internship" %}
-                              <span class="label label-primary">{{job.Type}}</span></h4>
-                           {% else %}   
-                              <span class="label label-default">{{job.Type}}</span></h4>   
-                           {% endif %}                        
-                        </div>
-                     </div>
+                        <div class="col-md-4 ui_location">
+                  <a target="_blank" href="http://maps.google.co.uk/maps?q={{job.location_position.latitude}},{{job.location_position.longitude}}"><h4 class="job-location">{{job.location_name}}</h4></a>
+                  </div>
+                  <div class="col-md-2 ui_type">   
+                  <h4 class="job-type">
+                  {% if job.Type|stringformat:"s" == 'Full Time' %}
+                  <span class="label label-success">{{job.Type}}</span></h4>
+                  {% elif job.Type|stringformat:"s" == "Freelance" %}
+                  <span class="label label-info">{{job.Type}}</span></h4>
+                  {% elif job.Type|stringformat:"s" == "Temporary" %}
+                  <span class="label label-warning">{{job.Type}}</span></h4>
+                  {% elif job.Type|stringformat:"s" == "Internship" %}
+                  <span class="label label-primary">{{job.Type}}</span></h4>
+                  {% else %}   
+                  <span class="label label-default">{{job.Type}}</span></h4>   
+                  {% endif %}                        
+                  </div>
+                  </div>
                   </a>
                </div>
                {% endfor %}
-             <!--  <li style="font-size:20px;text-align:center;">Load More...</li> -->
-
                <div class="job-link">
                   <a href="">
                      <div class="row">
-                        <a href=""><li style="font-size:15px;text-align:center; list-style-type: none;">Load More...</li></a>
-                     </div>
+                  <a href=""><li style="font-size:15px;text-align:center; list-style-type: none;">Load More...</li></a>
+                  </div>
                   </a>
                </div>
-
-
-
             </ol>
             {% else %}
             <p>No jobs are available.</p>
             {% endif %}
          </div>
-      {% endblock %}
+         {% endblock %}
       </div>
-        
-
-         
       {% block unique_footer %}
-       <div class="footer">
-            <p>Copyright (c) 2016 VdeK</p>
+      <div class="footer">
+         <div style="text-align: right;float:right">
+            <img src="http://tec-appsext.itcr.ac.cr/Matricula/images/logo-tec.png" height="27" width="139">
          </div>
+         <p>Copyright (c) 2016 VdeK</p>
+      </div>
       {% endblock %}   
    </body>
 </html>
-<!--
-<h1>All Available jobs</h1>
-{% if job_list %}
-<ul>
-   {% for job in job_list %}
-   <li><a href="{% url 'jobs:detail' school.id job.id %}">{{ job.name }}</a></li>
-   {% endfor %}
-</ul>
-{% else %}
-<p>No jobs are available.</p>
-{% endif %}
-<br>
-<h1>Available jobs</h1>
-{% if latest_job_list %}
-<ul>
-   {% for job in latest_job_list %}
-   <li><a href="{% url 'jobs:detail' job.id %}">{{ job.name }}</a></li>
-   {% endfor %}
-</ul>
-{% else %}
-<p>No jobs are available.</p>
-{% endif %}
-<br>
-<h1>Expired Jobs</h1>
-{% if expired_job_list %}
-<ul>
-   {% for job in expired_job_list %}
-   <li><a href="{% url 'jobs:detail' job.id %}">{{ job.name }}</a></li>
-   {% endfor %}
-</ul>
-{% else %}
-<p>No expired jobs.</p>
-{% endif %}

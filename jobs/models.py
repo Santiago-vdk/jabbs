@@ -70,6 +70,7 @@ class Company(models.Model):
     website = models.URLField(max_length=200)
     facebook = models.URLField(max_length=200)
     twitter = models.URLField(max_length=200)
+    creator = models.ForeignKey(User, related_name='companies')
 
     class Meta:
         verbose_name_plural = "companies"
@@ -89,7 +90,7 @@ class Job(models.Model):
     job_position = models.CharField(max_length=24)
     location_name = models.CharField(max_length=100)
     location_position = GeopositionField()
-    
+    creator = models.ForeignKey(User, related_name='jobs')    
     #job_type = models.CharField(max_length=24)
     #job_requirements = models.CharField(max_length=200)
     #tags = models.ManyToManyField(Tag, blank=True)

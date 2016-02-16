@@ -8,19 +8,25 @@
 <div class="detail_body">
 
     <div class="primary_description">
-
-
-
-
-
         <h2><strong>{{ job.name }}</strong></h2>
         <div class="row">
             <div class="col-md-1">
-                <h5><span class="label label-success">{{job.job_type}}</span>
+                <h5>
+            {% if job.Type|stringformat:"s" == 'Full Time' %}
+                  <span class="label label-success">{{job.Type}}</span></h4>
+                  {% elif job.Type|stringformat:"s" == "Freelance" %}
+                  <span class="label label-info">{{job.Type}}</span></h4>
+                  {% elif job.Type|stringformat:"s" == "Temporary" %}
+                  <span class="label label-warning">{{job.Type}}</span></h4>
+                  {% elif job.Type|stringformat:"s" == "Internship" %}
+                  <span class="label label-primary">{{job.Type}}</span></h4>
+                  {% else %}   
+                  <span class="label label-default">{{job.Type}}</span></h4>   
+                  {% endif %}     
                </h5>
             </div>
             <div class="col-md-2">
-                <h5><i class="fa fa-map-marker"></i> {{ job.job_location }}	</h5>
+                <a target="_blank" href="http://maps.google.co.uk/maps?q={{job.location_position.latitude}},{{job.location_position.longitude}}"><h5><i class="fa fa-map-marker"></i> {{ job.location_name }}</h5></a>
             </div>
             <div class="col-md-6">
                 <h5>Expires on: {{days_left}}</h5>
@@ -35,7 +41,7 @@
     	 </div>
     	 	<div class="col-md-5">
     	 		<a  href="{{job.company.website}}">
-    <h4><strong>{{job.company.name}}</strong> <i class="fa fa-external-link "></i></h4></a>
+    <h4><strong>Official website: {{job.company.name}}</strong> <i class="fa fa-external-link "></i></h4></a>
 
     	 </div>
 

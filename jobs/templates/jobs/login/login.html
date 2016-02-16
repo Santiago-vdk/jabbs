@@ -13,8 +13,9 @@
          <br>
          <form action="/jobs/accounts/login/" method="post">
             {% csrf_token %}
+            {% if request.REQUESt.next %}
             <input type="hidden" value="{% if request.REQUEST.next %}{{ request.REQUEST.next }}{% else %}{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}/{% endif %}{% endif %}" name="next" />
-            
+            {% endif %}
             <input type="text" name="username" placeholder="Username">
             <input type="password" name="password" placeholder="Password">
             <input type="submit" name="login" class="login login-submit" value="login">
