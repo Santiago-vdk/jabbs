@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jobs.apps.JobsConfig',
-    #'admin_shortcuts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,7 +72,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 
 WSGI_APPLICATION = 'jabbs.wsgi.application'
@@ -125,23 +123,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'C:/Users/svk19/Desktop/VdeK/jabbs/jobs/static/jobs'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, '../jobs/static')
 
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 
-
-##ADMIN_SHORTCUTS = [
-##    {
-##        'title': 'Shop',
-##        'shortcuts': [
-##            {
-##                'url_name': 'admin:shop_order_changelist',
-##                'title': 'Products',
-##                'count_new': 'project.utils.count_new_orders',
-##                'has_perms': 'project.utils.has_perms_to_orders',
-##            },
-##        ]
-##    },
-##]

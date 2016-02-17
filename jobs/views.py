@@ -124,7 +124,7 @@ def register_user(request):
     })
  
     return render_to_response(
-    'jobs/login/register.html',
+    'jobs/register.html',
     variables,
     )
  
@@ -151,7 +151,7 @@ def login_user(request):
                     else:
                         return HttpResponseRedirect('/')
 
-        return render(request,'jobs/login/login.html')         
+        return render(request,'jobs/login.html')         
     else:
         return HttpResponseRedirect('/')        
         
