@@ -1,5 +1,4 @@
 Django == 1.9.2
-django_endless_pagination == 2.0
 requests == 2.9.1
 python_bcrypt == 0.3.1
 django_ckeditor == 5.0.3

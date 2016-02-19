@@ -14,10 +14,7 @@ import json
 
 from jobs.forms import *
 from django.views.decorators.csrf import csrf_protect
-
 from django.utils import timezone
-
-from endless_pagination.decorators import page_template
 
 from .models import Job, Company, School, InvitationCode
 
